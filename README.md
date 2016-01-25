@@ -9,3 +9,5 @@ The game utilizes a very simple format for levels. They only contain four lines 
 To play it, you need a [homebrew-enabled Nintendo 3DS system](http://smealum.github.io/3ds/). It's been confirmed to work on New Nintendo 3DS (XL) but it hasn't been tested on Nintendo 3DS, Nintendo 3DS XL and Nintendo 2DS. CIA and 3DS builds are not available, as LÖVEPotion doesn't allow compiling in these formats yet. A PC version may be done at some point.
 
 The only thing I ask you when doing anything with the code, is that you don't come up with something like "Picroxx Plus!" with extra features that I was going to add anyway. If you want to help, please commit code here.
+
+Also, please excuse my awful coding. I'm still new to this.
