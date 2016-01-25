@@ -48,6 +48,8 @@ end
 
 function animation.levelcleared()
     
+    sfx.clearmelody:play()
+
     Timer.tween(1, levelcleared, {110, levelcleared[2], levelcleared[3]}, 'out-elastic')
 
     Timer.after(2.35, function() 

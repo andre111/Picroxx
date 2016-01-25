@@ -521,8 +521,6 @@ function checkcompleted()
 
 	          savedata.levelcleared()
 		      savedata.write()
-		          
-		      sfx.clearmelody:play()
 		      animation.levelcleared()
 
 		    end)
@@ -559,8 +557,6 @@ function checkcompleted()
 
 	             savedata.levelcleared()
 		         savedata.write()
-		          
-		         sfx.clearmelody:play()
 		         animation.levelcleared()
 
 		       end)
@@ -607,8 +603,6 @@ function checkcompleted()
 
 	                  savedata.levelcleared()
 		              savedata.write()
-		          
-		              sfx.clearmelody:play()
 		              animation.levelcleared()
 
 		            end)
