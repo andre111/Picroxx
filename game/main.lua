@@ -208,9 +208,13 @@ function puzzle:enter(from, level, gs, button)
     gridy = 0
 
     markMode = "O"
+    canMark = true
     zoomed = false
     clear = false
     quitting = false
+
+    currentRow = row0
+    currentCell = 0
     
     init.puzzlegraphics() 
     init.sfx()
@@ -321,6 +325,22 @@ function puzzle:update(dt)
 	
 	    if mistake.happening == true then mistake.update(dt) end
 
+	    if love.mouse.isDown(key) then
+  
+            if leveldata.gridsize == 5 then
+	            input.check5x5()
+	        end
+	
+            if leveldata.gridsize == 10 then
+	            input.check10x10()
+	        end
+	
+            if leveldata.gridsize == 15 and zoomed == true then
+	            input.check15x15()
+	        end
+
+        end
+
     end
 	
 end
@@ -343,23 +363,10 @@ function puzzle:keypressed(key)
 
 end
 
-function puzzle:mousepressed(key)
+function puzzle:mousereleased(key)
   
-    if clear == false and quitting == false then
-  
-        if leveldata.gridsize == 5 then
-	        input.check5x5()
-	    end
-	
-        if leveldata.gridsize == 10 then
-	        input.check10x10()
-	    end
-	
-        if leveldata.gridsize == 15 and zoomed == true then
-	        input.check15x15()
-	    end
-	
-    end
+    canMark = true
+    Xmode = nil
 
 end
 

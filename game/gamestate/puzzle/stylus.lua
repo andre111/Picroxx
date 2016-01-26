@@ -459,8 +459,11 @@ function input.checkcellpress(x1, x2, y1, y2, line, iline, cell)
 	
 	local mousex, mousey = love.mouse.getPosition()
 
-    if mousex >= truex1 and mousex <= truex2 and mousey >= truey1 and mousey <= truey2 then
+  if mousex >= truex1 and mousex <= truex2 and mousey >= truey1 and mousey <= truey2 then
 
+  	if currentRow == row0 and currentCell == 0 then currentRow = line currentCell = cell end
+    
+    if canMark == true then
 	  if markMode == "O" then
 		
 	    if iline[cell] == "O" then
@@ -475,6 +478,7 @@ function input.checkcellpress(x1, x2, y1, y2, line, iline, cell)
 	    elseif iline[cell] == "." then
 		  
 		  if line[cell] == "." then
+		  	canMark = false
 		    mistake.pop()
 		    mistake.x = x1 - 9
 		    mistake.y = y1 - 7
@@ -482,24 +486,66 @@ function input.checkcellpress(x1, x2, y1, y2, line, iline, cell)
 	        line[cell] = "X"
 			sfx.mistake:play()
 		  elseif line[cell] == "X" then
+		  	canMark = false
 	        line[cell] = "."
 			sfx.erase:play()
 	      end
 		end
 		
 	  elseif markMode == "X" then
-	  
+
 	    if line[cell] == "X" then
-	        line[cell] = "."
-			sfx.erase:play()
-			
+	      if currentRow ~= line or currentCell ~= cell then
+	      	if Xmode ~= nil and Xmode == "erase" then
+			    currentRow = line
+	    	    currentCell = cell
+
+	            line[cell] = "."
+			    sfx.erase:play()
+			elseif Xmode == nil then
+				Xmode = "erase"
+                currentRow = line
+	    	    currentCell = cell
+
+	            line[cell] = "."
+			    sfx.erase:play()
+			end
+		  elseif currentRow == line and currentCell == cell and Xmode == nil then
+		  	  Xmode = "erase"
+		  	  currentRow = line
+	    	  currentCell = cell
+	          line[cell] = "."
+			  sfx.erase:play()
+		  end			
 		elseif line[cell] == "." then
-	        line[cell] = "X"
-			sfx.Xmark:play()
-			
+		  if currentRow ~= line or currentCell ~= cell and Xmode == "mark" then
+	      	if Xmode ~= nil and Xmode == "mark" then
+			    currentRow = line
+	    	    currentCell = cell
+
+	            line[cell] = "X"
+			    sfx.Xmark:play()
+			elseif Xmode == nil then
+				Xmode = "mark"
+                currentRow = line
+	    	    currentCell = cell
+
+	            line[cell] = "X"
+			    sfx.Xmark:play()
+			end
+		  elseif currentRow == line and currentCell == cell and Xmode == nil then
+		  	  Xmode = "mark"
+		  	  currentRow = line
+	    	  currentCell = cell
+	          line[cell] = "X"
+			  sfx.Xmark:play()
+		  end	
 		end
+
 	  end
-    end
+
+	end
+  end
 end
 
 function checkcompleted()
