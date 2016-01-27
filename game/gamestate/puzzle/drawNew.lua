@@ -151,3 +151,18 @@ function drawNewPuzzle(_puzzle, _paused)
 	  love.graphics.setColor(255, 255, 255, 255)
 	end  
 end
+
+function drawPuzzleContentTop(_puzzle)
+	local psize = 6
+	local x = 200 - math.floor(_puzzle.columns / 2) * psize
+	local y = 100 - math.floor(_puzzle.rows / 2) * psize
+	
+	love.graphics.setColor(0, 0, 0)
+	for r=1, _puzzle.rows, 1 do
+		for c=1, _puzzle.columns, 1 do
+			if _puzzle.usergrid[r][c]=="O" then
+				love.graphics.rectangle('fill', x+(c-1)*psize, y+(r-1)*psize, psize, psize)
+			end
+		end
+	end
+end

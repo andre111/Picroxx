@@ -28,6 +28,7 @@ function drawtop.ingame()
 	--[[if leveldata.gridsize == 5 then drawtop.blackgrid5() end
 	if leveldata.gridsize == 10 then drawtop.blackgrid10() end
 	if leveldata.gridsize == 15 then drawtop.blackgrid15() end]]
+	drawPuzzleContentTop(currentNewPuzzle)
 	
 	love.graphics.setColor(255, 255, 255)
 	
@@ -215,48 +216,4 @@ function drawbot.pauseoverlay()
 
 	love.graphics.draw(pauseexit, 233, pauseanims[2])
 
-end
-
-function drawtop.blacksquare(row, cell, x, y)
---TODO: Reimplement
-   --[[if row[cell] == "O" then
-     love.graphics.rectangle('fill', x, y, 6, 6)
-   end]]
-   
-end
-
-function drawbot.cell(line, cell, x, y)
-
-    if line[cell] == 'O' then
-	  love.graphics.draw(mark, x, y)
-    end
-
-    if line[cell] == 'X' then
-	  love.graphics.draw(Xmark, x, y)
-    end		
-  
-end
-
-function drawbot.cellTranslated(line, cell, x, y)
-
-    if line[cell] == 'O' then
-	  love.graphics.draw(mark, gridx + x, gridy + y)
-    end
-
-    if line[cell] == 'X' then
-	  love.graphics.draw(Xmark, gridx + x, gridy + y)
-    end		
-  
-end
-
-function drawbot.smallcell(line, cell, x, y)
-
-    if line[cell] == 'O' then
-	  love.graphics.draw(smallmark, x, y)
-    end
-
-    if line[cell] == 'X' then
-	  love.graphics.draw(smallXmark, x, y)
-    end		
-  
 end
