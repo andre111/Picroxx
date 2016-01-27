@@ -1,7 +1,7 @@
-function drawPuzzleBG(_puzzle, _small)
+function drawPuzzleBG(_puzzle)
 	local cellSize = 13
 	--For Using Smaller Gridcells(15x15 and up?)
-	if(_small) then 
+	if(puzzleSmall) then 
 		cellSize = 7
 	end
 	
@@ -48,15 +48,33 @@ function drawPuzzleBG(_puzzle, _small)
 	end
 end
 
-function drawPuzzleContent(_puzzle, _small)
+function drawPuzzleContent(_puzzle)
+	local cellSize = 13
+	--For Using Smaller Gridcells(15x15 and up?)
+	if(puzzleSmall) then 
+		cellSize = 7
+	end
 	
+	local x = puzzleX
+	local y = puzzleY
+	
+	for r=1, _puzzle.rows, 1 do
+		for c=1, _puzzle.columns, 1 do
+			--TODO: Draw smaller images when puzzleSmall is true
+			if _puzzle.usergrid[r][c]=="O" then
+				love.graphics.draw(mark, x+1 + ((cellSize+1)*(c-1)), y+1 + ((cellSize+1)*(r-1)))
+			elseif _puzzle.usergrid[r][c]=="X" then
+				love.graphics.draw(Xmark, x+1 + ((cellSize+1)*(c-1)), y+1 + ((cellSize+1)*(r-1)))
+			end
+		end
+	end
 end
 
-function drawPuzzleNumbers(_puzzle, _small)
+function drawPuzzleNumbers(_puzzle)
 	local cellSize = 13
 	local font = fontnumbers
 	--For Using Smaller Gridcells(15x15 and up?)
-	if(_small) then 
+	if(puzzleSmall) then 
 		cellSize = 7
 		font = fontsnumbers
 	end
@@ -85,7 +103,25 @@ function drawPuzzleNumbers(_puzzle, _small)
 end
 
 function drawNewPuzzle(_puzzle)
-	drawPuzzleBG(_puzzle, false)
-	drawPuzzleContent(_puzzle, false)
-	drawPuzzleNumbers(_puzzle, false)
+	drawPuzzleBG(_puzzle)
+	drawPuzzleContent(_puzzle)
+	drawPuzzleNumbers(_puzzle)
+	
+	if mistake.happening == true and mistake.timeLoss == 2 then
+      love.graphics.setColor(255, 255, 255, mistake.alpha)
+	  love.graphics.draw(twoMin, mistake.x, mistake.y - mistake.speed)
+	  love.graphics.setColor(255, 255, 255, 255)
+	end
+	
+    if mistake.happening == true and mistake.timeLoss == 4 then
+	  love.graphics.setColor(255, 255, 255, mistake.alpha)
+	  love.graphics.draw(fourMin, mistake.x, mistake.y - mistake.speed)
+	  love.graphics.setColor(255, 255, 255, 255)
+	end  
+	
+    if mistake.happening == true and mistake.timeLoss == 8 then 
+	  love.graphics.setColor(255, 255, 255, mistake.alpha)
+	  love.graphics.draw(eightMin, mistake.x, mistake.y - mistake.speed) 
+	  love.graphics.setColor(255, 255, 255, 255)
+	end  
 end

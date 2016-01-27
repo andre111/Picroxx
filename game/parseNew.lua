@@ -1,6 +1,7 @@
 function convertOld()
 	local puzzle = {}
 	puzzle.grid = {}
+	puzzle.usergrid = {}
 	puzzle.rows = 0;
 	puzzle.columns = 0;
 	puzzle.numbersRows = {}
@@ -41,6 +42,13 @@ function parseDynamic(_puzzle)
 	
 	for i=1, _puzzle.columns, 1 do
 		_puzzle.numbersColumns[i] = parseDynamicColumn(i, _puzzle);
+	end
+	
+	for r=1, _puzzle.rows, 1 do
+		_puzzle.usergrid[r] = {}
+		for c=1, _puzzle.columns, 1 do
+			_puzzle.usergrid[r][c] = "."
+		end
 	end
 end
 

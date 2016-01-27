@@ -78,11 +78,6 @@ function mainmenu:init()
 
     menusubmenu = "mainmenu"
 
-	--TODO: ADDED:
-	dofile("courses/blank10x10.lua")
-	dofile("courses/mariopicross/easy/level2/a.lua")
-	puzzletest = convertOld()
-	resetPuzzlePosition(puzzletest)
 end
 
 function mainmenu:enter()
@@ -108,8 +103,6 @@ function mainmenu:draw()
 
         drawbot.menu()
 
-	--TODO: ADDED:
-	drawNewPuzzle(puzzletest)
 end
 
 function mainmenu:update(dt)
@@ -239,10 +232,13 @@ function puzzle:enter(from, level, gs, button)
 
     leveltosave = button
 
-    dofile("courses/blank15x15.lua")
+	--TODO: ADDED
+    --dofile("courses/blank15x15.lua")
 	dofile(level)
+	currentNewPuzzle = convertOld()
+	resetPuzzlePosition(currentNewPuzzle)
  
-    if leveldata.gridsize == 5 then
+    --[[if leveldata.gridsize == 5 then
     	dofile("courses/blank5x5.lua")
 	    dofile(level)
         parse5x5()
@@ -258,7 +254,7 @@ function puzzle:enter(from, level, gs, button)
     	dofile("courses/blank15x15.lua")
 	    dofile(level)
         parse15x15()
-    end
+    end]]
 
     bgmjazz = love.audio.newSource("bgm/jazz.wav")
     bgmjazz:setLooping(true)
@@ -278,8 +274,10 @@ function puzzle:draw()
 	    end
 	
     love.graphics.setScreen('bottom')
-
-        if leveldata.gridsize == 5 then
+		--TODO: ADDED: COMPLETE
+		drawNewPuzzle(currentNewPuzzle)
+	
+        --[[if leveldata.gridsize == 5 then
 	        drawbot.grid5(true)
 	    end
 	
@@ -293,7 +291,7 @@ function puzzle:draw()
 	        elseif zoomed == true then
 	            drawbot.grid15(true)
 	        end
-	    end
+	    end]]
 	
 	if clear == true then
 
@@ -327,15 +325,18 @@ function puzzle:update(dt)
   
     if clear == false and quitting == false then
   
-	    if leveldata.gridsize == 15 and zoomed == true then
+	    --[[if leveldata.gridsize == 15 and zoomed == true then
 	        input.movegrid(board15x15)
-	    end
+	    end]]
 	
         toptimer.update(dt)
 	
 	    if mistake.happening == true then mistake.update(dt) end
 
-	    if love.mouse.isDown(key) then
+		--TODO: ADDED: COMPLETE
+		checkPuzzleInput(currentNewPuzzle)
+		
+	    --[[if love.mouse.isDown(key) then
   
             if leveldata.gridsize == 5 then
 	            input.check5x5()
@@ -349,7 +350,7 @@ function puzzle:update(dt)
 	            input.check15x15()
 	        end
 
-        end
+        end]]
 
     end
 	
