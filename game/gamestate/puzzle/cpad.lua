@@ -1,27 +1,19 @@
-function input.movegrid(image)
-   
-   if love.keyboard.isDown("KEY_CPAD_LEFT") then
-    if gridx <= 0 then
-     gridx = gridx + 2
+function input.movegrid()
+	--TODO: Needs new limiting range checks
+	if love.keyboard.isDown("KEY_CPAD_LEFT") then
+		puzzleX = puzzleX - 2
 	end
-   end
    
-   if love.keyboard.isDown("KEY_CPAD_RIGHT") then
-    if gridx >= -120 then
-     gridx = gridx - 2
+	if love.keyboard.isDown("KEY_CPAD_RIGHT") then
+		puzzleX = puzzleX + 2
 	end
-   end
    
-   if love.keyboard.isDown("KEY_CPAD_UP") then
-    if gridy <= 0 then
-     gridy = gridy + 2
+	if love.keyboard.isDown("KEY_CPAD_UP") then
+		puzzleY = puzzleY - 2
 	end
-   end
    
-   if love.keyboard.isDown("KEY_CPAD_DOWN") then
-    if gridy >= -78 then
-     gridy = gridy - 2
+	if love.keyboard.isDown("KEY_CPAD_DOWN") then
+		puzzleY = puzzleY + 2
 	end
-   end
    
 end

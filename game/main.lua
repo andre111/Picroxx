@@ -290,9 +290,7 @@ function puzzle:update(dt)
   
     if clear == false and quitting == false then
   
-	    --[[if leveldata.gridsize == 15 and zoomed == true then
-	        input.movegrid(board15x15)
-	    end]]
+	    input.movegrid()
 	
         toptimer.update(dt)
 	
@@ -300,7 +298,7 @@ function puzzle:update(dt)
 
 		--TODO: ADDED: COMPLETE
 		checkPuzzleInput(currentNewPuzzle)
-
+		
     end
 	
 end
