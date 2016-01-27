@@ -134,8 +134,11 @@ end
 function levelselect:enter(from, course)
    
     init.levelselectgraphics()
+    
+    lastCourse = course
 
-    dofile(course)
+    if from == mainmenu then dofile(course) end
+    if from == puzzle then dofile(lastCourse) end
 	 
     savedata.read()
     savedata.write()
@@ -208,52 +211,46 @@ function puzzle:enter(from, level, gs, button)
     gridy = 0
 
     markMode = "O"
-    canMark = true
+    canMark = false
     zoomed = false
     clear = false
     quitting = false
 
     currentRow = row0
     currentCell = 0
+
+    toptimer.clear()
     
     init.puzzlegraphics() 
     init.sfx()
 
     leveltosave = button
+
+    dofile("courses/blank15x15.lua")
+	dofile(level)
  
-    if gs == "5x5" then
- 
-        dofile("courses/blank5x5.lua")
+    if leveldata.gridsize == 5 then
+    	dofile("courses/blank5x5.lua")
 	    dofile(level)
-	
-	    parse5x5()
-	
+        parse5x5()
     end
- 
-    if gs == "10x10" then
- 
-        dofile("courses/blank10x10.lua")
+
+    if leveldata.gridsize == 10 then
+    	dofile("courses/blank10x10.lua")
 	    dofile(level)
-	
-	    parse10x10()
-	
+        parse10x10()
     end
- 
-    if gs == "15x15" then
- 
-        dofile("courses/blank15x15.lua")
+
+    if leveldata.gridsize == 15 then
+    	dofile("courses/blank15x15.lua")
 	    dofile(level)
-	
-	    parse15x15()
-	
+        parse15x15()
     end
 
     bgmjazz = love.audio.newSource("bgm/jazz.wav")
     bgmjazz:setLooping(true)
     bgmjazz:setVolume(0.75)
     bgmjazz:play()
-
-    toptimer.clear()
 
 end
 
@@ -486,9 +483,7 @@ function pause:mousepressed(key)
 
                 
                 Timer.after(4, function()
-		            Gamestate.switch(mainmenu) 
-		            init.menu() 
-		            mainmenu.buttonsEnter = true
+		            Gamestate.switch(levelselect, lastCourse) 
                 end)
 
             end

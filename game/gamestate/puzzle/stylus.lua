@@ -571,7 +571,7 @@ function checkcompleted()
 
 		    end)
 
-		    Timer.after(10, function() Gamestate.switch(mainmenu) init.menu() end)
+		    Timer.after(10, function() Gamestate.switch(levelselect, lastCourse) end)
 
 	      end
 	     end
@@ -607,7 +607,7 @@ function checkcompleted()
 
 		       end)
 
-		       Timer.after(10, function() Gamestate.switch(mainmenu) init.menu() end)
+		       Timer.after(10, function() Gamestate.switch(levelselect, lastCourse) end)
 
 	           end
 	          end
@@ -653,7 +653,7 @@ function checkcompleted()
 
 		            end)
 
-		            Timer.after(10, function() Gamestate.switch(mainmenu) init.menu() end)
+		            Timer.after(10, function() Gamestate.switch(levelselect, lastCourse) end)
 
 	                end
 	               end
