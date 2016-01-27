@@ -84,7 +84,7 @@ function drawPuzzleNumbers(_puzzle)
 
 	for r=1, _puzzle.rows, 1 do
 		local currentNumber = 1
-		for i=_puzzle.columns/2+1, 1, -1 do
+		for i=_puzzle.columns, 1, -1 do
 			if _puzzle.numbersRows[r][i]>0 then
 				love.graphics.draw(font[_puzzle.numbersRows[r][i]], x - ((cellSize+1)*currentNumber) - 2, y + (r-1)*(cellSize+1) + 2)
 				currentNumber = currentNumber + 1
@@ -93,7 +93,7 @@ function drawPuzzleNumbers(_puzzle)
 	end
 	for c=1, _puzzle.columns, 1 do
 		local currentNumber = 1
-		for i=_puzzle.rows/2+1, 1, -1 do
+		for i=_puzzle.rows, 1, -1 do
 			if _puzzle.numbersColumns[c][i]>0 then
 				love.graphics.draw(font[_puzzle.numbersColumns[c][i]], x + (c-1)*(cellSize+1) + 1, y - ((cellSize+1)*currentNumber))
 				currentNumber = currentNumber + 1
@@ -102,10 +102,21 @@ function drawPuzzleNumbers(_puzzle)
 	end
 end
 
-function drawNewPuzzle(_puzzle)
+function drawNewPuzzle(_puzzle, _paused)
 	drawPuzzleBG(_puzzle)
 	drawPuzzleContent(_puzzle)
-	drawPuzzleNumbers(_puzzle)
+	
+	if _paused == true then
+		drawbot.pauseoverlay()
+	else
+		drawPuzzleNumbers(_puzzle)
+	
+		if markMode == "O" then 
+			love.graphics.draw(mark_indicator, 0, 12)
+		else
+			love.graphics.draw(mark_Xindicator, 0, 12)
+		end
+	end
 	
 	if mistake.happening == true and mistake.timeLoss == 2 then
       love.graphics.setColor(255, 255, 255, mistake.alpha)

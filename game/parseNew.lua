@@ -36,12 +36,12 @@ function convertOld()
 end
 
 function parseDynamic(_puzzle)
-	for i=1, _puzzle.rows, 1 do
-		_puzzle.numbersRows[i] = parseDynamicRow(i, _puzzle);
+	for r=1, _puzzle.rows, 1 do
+		_puzzle.numbersRows[r] = parseDynamicRow(r, _puzzle);
 	end
 	
-	for i=1, _puzzle.columns, 1 do
-		_puzzle.numbersColumns[i] = parseDynamicColumn(i, _puzzle);
+	for c=1, _puzzle.columns, 1 do
+		_puzzle.numbersColumns[c] = parseDynamicColumn(c, _puzzle);
 	end
 	
 	for r=1, _puzzle.rows, 1 do
@@ -56,7 +56,7 @@ function parseDynamicRow(_row, _puzzle)
 	local numbersRow = {}
 	
 	--Fill with clear Data
-	for i=1, _puzzle.columns/2+1, 1 do
+	for i=1, _puzzle.columns, 1 do
 		numbersRow[i] = -1
 	end
 	
@@ -86,7 +86,7 @@ function parseDynamicColumn(_column, _puzzle)
 	local numbersColumn = {}
 	
 	--Fill with clear Data
-	for i=1, _puzzle.rows/2+1, 1 do
+	for i=1, _puzzle.rows, 1 do
 		numbersColumn[i] = -1
 	end
 	

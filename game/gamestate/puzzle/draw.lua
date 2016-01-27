@@ -24,9 +24,10 @@ function drawtop.ingame()
 	
 	love.graphics.draw(whiteoverlay, 0, 0)
 	
-	if leveldata.gridsize == 5 then drawtop.blackgrid5() end
+	--TODO: Reimplement
+	--[[if leveldata.gridsize == 5 then drawtop.blackgrid5() end
 	if leveldata.gridsize == 10 then drawtop.blackgrid10() end
-	if leveldata.gridsize == 15 then drawtop.blackgrid15() end
+	if leveldata.gridsize == 15 then drawtop.blackgrid15() end]]
 	
 	love.graphics.setColor(255, 255, 255)
 	
@@ -44,7 +45,8 @@ function drawtop.ingamezoomed()
 
     love.graphics.setColor(255, 255, 255)
 	
-	if leveldata.gridsize == 15 then drawtop.smallgrid15(true) end
+	--TODO: Reimplement
+	--[[if leveldata.gridsize == 15 then drawtop.smallgrid15(true) end]]
 	
 	drawtop.timer(381, 370, 354, 343, 327, 316, 3)
 	
@@ -216,10 +218,10 @@ function drawbot.pauseoverlay()
 end
 
 function drawtop.blacksquare(row, cell, x, y)
-
-   if row[cell] == "O" then
+--TODO: Reimplement
+   --[[if row[cell] == "O" then
      love.graphics.rectangle('fill', x, y, 6, 6)
-   end
+   end]]
    
 end
 

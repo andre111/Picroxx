@@ -9,10 +9,6 @@ drawtop = {}
 drawbot = {}
 
 require("gamestate.puzzle.draw")
-require("gamestate.puzzle.draw5x5")
-require("gamestate.puzzle.draw10x10")
-require("gamestate.puzzle.draw15x15")
-require("gamestate.puzzle.drawsmall15x15")
 --TODO: ADDED:
 require("gamestate.puzzle.drawNew")
 require("gamestate.puzzle.puzzleNew")
@@ -25,7 +21,6 @@ unload = {}
 
 require("resources")
 
-require("parse")
 require("timer")
 
 --TODO: ADDED:
@@ -33,7 +28,6 @@ require("parseNew")
 
 input = {}
 
-require("gamestate.puzzle.stylus")
 require("gamestate.puzzle.abxy")
 require("gamestate.puzzle.cpad")
 
@@ -221,6 +215,7 @@ function puzzle:enter(from, level, gs, button)
     zoomed = false
     clear = false
     quitting = false
+	drawnumbers = true
 
     currentRow = row0
     currentCell = 0
@@ -233,28 +228,13 @@ function puzzle:enter(from, level, gs, button)
     leveltosave = button
 
 	--TODO: ADDED
-    --dofile("courses/blank15x15.lua")
+	--loading old level
+    dofile("courses/blank15x15.lua")
 	dofile(level)
+	
+	--convert to new internal format
 	currentNewPuzzle = convertOld()
 	resetPuzzlePosition(currentNewPuzzle)
- 
-    --[[if leveldata.gridsize == 5 then
-    	dofile("courses/blank5x5.lua")
-	    dofile(level)
-        parse5x5()
-    end
-
-    if leveldata.gridsize == 10 then
-    	dofile("courses/blank10x10.lua")
-	    dofile(level)
-        parse10x10()
-    end
-
-    if leveldata.gridsize == 15 then
-    	dofile("courses/blank15x15.lua")
-	    dofile(level)
-        parse15x15()
-    end]]
 
     bgmjazz = love.audio.newSource("bgm/jazz.wav")
     bgmjazz:setLooping(true)
@@ -275,23 +255,8 @@ function puzzle:draw()
 	
     love.graphics.setScreen('bottom')
 		--TODO: ADDED: COMPLETE
-		drawNewPuzzle(currentNewPuzzle)
+		drawNewPuzzle(currentNewPuzzle, false)
 	
-        --[[if leveldata.gridsize == 5 then
-	        drawbot.grid5(true)
-	    end
-	
-        if leveldata.gridsize == 10 then
-	        drawbot.grid10(true)
-	    end
-	
-	    if leveldata.gridsize == 15 then
-	        if zoomed == false then
-	            drawbot.smallgrid15(true)
-	        elseif zoomed == true then
-	            drawbot.grid15(true)
-	        end
-	    end]]
 	
 	if clear == true then
 
@@ -335,22 +300,6 @@ function puzzle:update(dt)
 
 		--TODO: ADDED: COMPLETE
 		checkPuzzleInput(currentNewPuzzle)
-		
-	    --[[if love.mouse.isDown(key) then
-  
-            if leveldata.gridsize == 5 then
-	            input.check5x5()
-	        end
-	
-            if leveldata.gridsize == 10 then
-	            input.check10x10()
-	        end
-	
-            if leveldata.gridsize == 15 and zoomed == true then
-	            input.check15x15()
-	        end
-
-        end]]
 
     end
 	
@@ -428,22 +377,8 @@ function pause:draw()
 	
     love.graphics.setScreen('bottom')
 
-    if leveldata.gridsize == 5 then
-	    drawbot.grid5(false)
-	end
-	
-    if leveldata.gridsize == 10 then
-	    drawbot.grid10(false)
-	end
-	
-	if leveldata.gridsize == 15 then
-	    if zoomed == false then
-	        drawbot.smallgrid15(false)
-	    elseif zoomed == true then
-	        drawbot.grid15(false)
-	    end
-	end
-
+	--TODO: ADDED: COMPLETE
+	drawNewPuzzle(currentNewPuzzle, true)
 end
 
 function pause:update(dt)
