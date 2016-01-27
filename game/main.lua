@@ -13,6 +13,9 @@ require("gamestate.puzzle.draw5x5")
 require("gamestate.puzzle.draw10x10")
 require("gamestate.puzzle.draw15x15")
 require("gamestate.puzzle.drawsmall15x15")
+--TODO: ADDED:
+require("gamestate.puzzle.drawNew")
+require("gamestate.puzzle.puzzleNew")
 
 require("gamestate.mainmenu.draw")
 require("gamestate.levelselect.draw")
@@ -24,6 +27,9 @@ require("resources")
 
 require("parse")
 require("timer")
+
+--TODO: ADDED:
+require("parseNew")
 
 input = {}
 
@@ -72,6 +78,11 @@ function mainmenu:init()
 
     menusubmenu = "mainmenu"
 
+	--TODO: ADDED:
+	dofile("courses/blank10x10.lua")
+	dofile("courses/mariopicross/easy/level2/a.lua")
+	puzzletest = convertOld()
+	resetPuzzlePosition(puzzletest)
 end
 
 function mainmenu:enter()
@@ -97,6 +108,8 @@ function mainmenu:draw()
 
         drawbot.menu()
 
+	--TODO: ADDED:
+	drawNewPuzzle(puzzletest)
 end
 
 function mainmenu:update(dt)
