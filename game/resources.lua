@@ -112,6 +112,9 @@ function init.puzzlegraphics()
 	board10x10 = love.graphics.newImage('gfx/puzzle/boards/normal/board10x10.png')
 	board15x15 = love.graphics.newImage('gfx/puzzle/boards/normal/board15x15.png')
 	
+	numberStripLeft = love.graphics.newImage('gfx/puzzle/boards/normal/numberStripLeft.png')
+	numberStripTop = love.graphics.newImage('gfx/puzzle/boards/normal/numberStripTop.png')
+	
 	small15x15 = love.graphics.newImage('gfx/puzzle/boards/normal/small15x15.png')
 	small15x15top = love.graphics.newImage('gfx/puzzle/boards/normal/small15x15top.png')
 	

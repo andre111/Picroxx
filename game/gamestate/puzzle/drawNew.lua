@@ -13,9 +13,12 @@ function drawPuzzleBG(_puzzle)
 
 	--BG Border
 	love.graphics.setColor(173, 189, 255)
-	love.graphics.rectangle('fill', x+1, y+1, w+3, h+3)
+	love.graphics.rectangle('fill', x+1, y+1, w+2, h+2)
 	love.graphics.setColor(0, 0, 0)
-	love.graphics.rectangle('line', x, y, w+2, h+2)
+	love.graphics.rectangle('fill', x, y, w+2, h+2)
+	
+	love.graphics.setColor(173, 189, 255)
+	love.graphics.rectangle('fill', x+1, y+1, w, h)
 	
 	--BG 5x5 Dividers
 	love.graphics.setColor(255, 165, 0)
@@ -44,6 +47,18 @@ function drawPuzzleBG(_puzzle)
 			end
 			
 			love.graphics.rectangle('fill', x+1 + ((cellSize+1)*(c-1)), y+1 + ((cellSize+1)*(r-1)), cellSize, cellSize)
+		end
+	end
+	
+	--BG Number Strips
+	for r=1, _puzzle.rows, 1 do
+		if r%2==1 then
+			love.graphics.draw(numberStripLeft, x-80, y + ((r-1)*(cellSize+1)))
+		end
+	end
+	for c=1, _puzzle.columns, 1 do
+		if c%2==1 then
+			love.graphics.draw(numberStripTop, x + ((c-1)*(cellSize+1)) + 1, y-80)
 		end
 	end
 end
