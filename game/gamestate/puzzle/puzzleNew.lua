@@ -12,7 +12,8 @@ function checkPuzzleCompleted(_puzzle)
 	local complete = true
 	for r=1, _puzzle.rows, 1 do
 		for c=1, _puzzle.columns, 1 do
-			if _puzzle.grid[r][c] == "O" and _puzzle.usergrid[r][c] ~= "O" then
+			if (_puzzle.grid[r][c] == "O" and _puzzle.usergrid[r][c] ~= "O")
+			or (_puzzle.grid[r][c] ~= "O" and _puzzle.usergrid[r][c] == "O") then
 				complete = false
 			end
 		end
@@ -48,6 +49,7 @@ function checkPuzzleInput(_puzzle)
 	local mouseDown = love.mouse.isDown();
 	if not mouseDown then
 		Xmode = nil
+		Omode = nil
 	end
 
 	for r=1, _puzzle.rows, 1 do
@@ -63,22 +65,34 @@ function checkPuzzleInput(_puzzle)
 				if canMark == true then
 					if markMode == "O" then
 						if _puzzle.usergrid[r][c] == "." then
-							if _puzzle.grid[r][c] == "O" then
-								_puzzle.usergrid[r][c] = "O"
-								sfx.mark:play()
-								checkPuzzleCompleted(_puzzle)
-							else
-								canMark = false
-								mistake.pop()
-								mistake.x = x1 - 9
-								mistake.y = y1 - 7
-							  
-								_puzzle.usergrid[r][c] = "X"
-								sfx.mistake:play()
+							if Omode == nil then
+								Omode = "mark"
+							end
+						
+							if Omode == "mark" then
+								if _puzzle.grid[r][c] == "O" then
+									_puzzle.usergrid[r][c] = "O"
+									sfx.mark:play()
+									checkPuzzleCompleted(_puzzle)
+								else
+									canMark = false
+									mistake.pop()
+									mistake.x = x1 - 9
+									mistake.y = y1 - 7
+								  
+									_puzzle.usergrid[r][c] = "X"
+									sfx.mistake:play()
+								end
 							end
 						elseif _puzzle.usergrid[r][c] == "X" then
-							_puzzle.usergrid[r][c] = "."
-							sfx.erase:play()
+							if Omode == nil then
+								Omode = "erase"
+							end
+							
+							if Omode == "erase" then
+								_puzzle.usergrid[r][c] = "."
+								sfx.erase:play()
+							end
 						end
 					elseif markMode == "X" then
 						if _puzzle.usergrid[r][c] == "." then

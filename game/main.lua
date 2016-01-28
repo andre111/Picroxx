@@ -78,7 +78,7 @@ function mainmenu:enter()
     
     init.menugraphics()
 
-    bgmtitle = love.audio.newSource("bgm/title.wav")
+	bgmtitle = love.audio.newSource("bgm/title.wav")
     bgmtitle:setLooping(true)
     bgmtitle:setVolume(0.75)
     bgmtitle:play()
@@ -126,7 +126,7 @@ function mainmenu:leave()
 
     bgmtitle:stop()
 
-    bgmtitle = nil
+	bgmtitle = nil
     collectgarbage()
 
 end
@@ -221,6 +221,7 @@ function puzzle:enter(from, level, gs, button)
     currentCell = 0
 
     toptimer.clear()
+	mistake.reset()
     
     init.puzzlegraphics() 
     init.sfx()
@@ -236,7 +237,7 @@ function puzzle:enter(from, level, gs, button)
 	currentNewPuzzle = convertOld()
 	resetPuzzlePosition(currentNewPuzzle)
 
-    bgmjazz = love.audio.newSource("bgm/jazz.wav")
+	bgmjazz = love.audio.newSource("bgm/jazz.wav")
     bgmjazz:setLooping(true)
     bgmjazz:setVolume(0.75)
     bgmjazz:play()
@@ -330,7 +331,7 @@ end
 
 function puzzle:leave()
 
-    bgmjazz = nil
+	bgmjazz = nil
 
     sfx.mark = nil
     sfx.Xmark = nil
@@ -340,7 +341,7 @@ function puzzle:leave()
 	sfx.clearmelody = nil
 
     unload.puzzlegraphics()
-    collectgarbage()
+	collectgarbage()
 
 end
 

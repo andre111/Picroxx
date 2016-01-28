@@ -96,6 +96,15 @@ mistake.x = 0
 mistake.y = 0
 mistake.alpha = 255
 
+function mistake.reset()
+	mistake.happening = false
+	mistake.timeLoss = 0
+	mistake.speed = 0
+	mistake.x = 0
+	mistake.y = 0
+	mistake.alpha = 255
+end
+
 function mistake.pop()
 
   mistake.speed = 0

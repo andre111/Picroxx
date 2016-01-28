@@ -220,8 +220,6 @@ function init.sfx()
 
 end
 
-
-
 function init.menu()
 	
 	button1 = {}
