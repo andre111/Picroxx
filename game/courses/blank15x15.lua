@@ -1,4 +1,5 @@
 leveldata.gridsize = 15
+leveldata.gridsizeW = nil
 leveldata.gamemode = "normal"
 leveldata.number = 0
 leveldata.letter = "none"

@@ -89,6 +89,10 @@ function input.checklevelgridpress()
 end
 
 function input.checklevelpress(x1, x2, y1, y2, level, levelstring)
+  if level.disabled == true then
+    return false
+  end
+
 
   local mousex, mousey = love.mouse.getPosition()
 

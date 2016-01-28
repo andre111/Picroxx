@@ -7,27 +7,14 @@ function convertOld()
 	puzzle.numbersRows = {}
 	puzzle.numbersColumns = {}
 	
-	if leveldata.gridsize == 5 then
-		puzzle.rows = 5;
-		puzzle.columns = 5;
+	puzzle.rows = leveldata.gridsize;
+	puzzle.columns = leveldata.gridsize;
+	if leveldata.gridsizeW~= nil then
+		puzzle.columns = leveldata.gridsizeW
+	end
 		
-		for i=1, 5, 1 do
-			puzzle.grid[i] = _G["irow"..i]
-		end
-	elseif leveldata.gridsize == 10 then
-		puzzle.rows = 10;
-		puzzle.columns = 10;
-		
-		for i=1, 10, 1 do
-			puzzle.grid[i] = _G["irow"..i]
-		end
-	elseif leveldata.gridsize == 15 then
-		puzzle.rows = 15;
-		puzzle.columns = 15;
-		
-		for i=1, 15, 1 do
-			puzzle.grid[i] = _G["irow"..i]
-		end
+	for i=1, puzzle.rows, 1 do
+		puzzle.grid[i] = _G["irow"..i]
 	end
 	
 	parseDynamic(puzzle)

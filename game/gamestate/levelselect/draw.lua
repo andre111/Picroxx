@@ -171,6 +171,9 @@ function drawbot.levelselect()
 end
 
 function drawbot.levelbutton(level, button, hover, lx, ly)
+  if level.disabled == true then 
+    return false
+  end
 
   if level.hover == false then
     love.graphics.draw(button, lx, ly)
