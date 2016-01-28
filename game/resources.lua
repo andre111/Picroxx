@@ -21,6 +21,42 @@ menu.emptybutton_s:setMode("once")
 
 menu.backbutton = love.graphics.newImage('gfx/misc/back.png')
 
+
+function init.sound()
+	bgmjazz = love.audio.newSource("bgm/jazz.wav")
+	bgmtitle = love.audio.newSource("bgm/title.wav")
+
+	init.sfx()
+end
+
+function unload.sound()
+	bgmjazz = nil
+	bgmtitle = nil
+
+	unload.sfx() 
+	collectgarbage()
+end
+
+function init.graphics()
+	init.menugraphics()
+	init.levelselectgraphics()
+	init.puzzlegraphics()
+	init.fonts()
+	
+end
+
+function unload.graphics()
+	unload.menugraphics()
+	unload.levelselectgraphics()
+	unload.puzzlegraphics()
+	--TODO: unload fonts?
+end
+
+
+
+
+
+
 function init.menugraphics()    
 	
     menu.titlescreen = love.graphics.newImage('gfx/mainmenu/title.png')
@@ -108,15 +144,8 @@ function init.puzzlegraphics()
 	zoomin_indicator = love.graphics.newImage('gfx/puzzle/gui/zoomin_indicator.png')
 	zoomout_indicator = love.graphics.newImage('gfx/puzzle/gui/zoomout_indicator.png')
 	
-	board5x5 = love.graphics.newImage('gfx/puzzle/boards/normal/board5x5.png')
-	board10x10 = love.graphics.newImage('gfx/puzzle/boards/normal/board10x10.png')
-	board15x15 = love.graphics.newImage('gfx/puzzle/boards/normal/board15x15.png')
-	
 	numberStripLeft = love.graphics.newImage('gfx/puzzle/boards/normal/numberStripLeft.png')
 	numberStripTop = love.graphics.newImage('gfx/puzzle/boards/normal/numberStripTop.png')
-	
-	small15x15 = love.graphics.newImage('gfx/puzzle/boards/normal/small15x15.png')
-	small15x15top = love.graphics.newImage('gfx/puzzle/boards/normal/small15x15top.png')
 	
 	mark = love.graphics.newImage('gfx/puzzle/boards/normal/mark.png')
 	Xmark = love.graphics.newImage('gfx/puzzle/boards/normal/Xmark.png')
@@ -220,6 +249,15 @@ function init.sfx()
 
 end
 
+function unload.sfx() 
+	sfx.mark = nil
+	sfx.Xmark = nil
+	sfx.boop = nil
+	sfx.mistake = nil
+	sfx.erase = nil
+	sfx.clearmelody = nil
+end
+
 function init.menu()
 	
 	button1 = {}
@@ -258,12 +296,8 @@ function unload.puzzlegraphics()
 	zoomin_indicator = nil
 	zoomout_indicator = nil
 	
-	board5x5 = nil
-	board10x10 = nil
-	board15x15 = nil
-	
-	small15x15 = nil
-	small15x15top = nil
+	numberStripLeft = nil
+	numberStripTop = nil
 	
 	mark = nil
 	Xmark = nil

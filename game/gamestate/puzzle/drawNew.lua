@@ -65,9 +65,13 @@ end
 
 function drawPuzzleContent(_puzzle)
 	local cellSize = 13
+	local markO = mark
+	local markX = Xmark
 	--For Using Smaller Gridcells(15x15 and up?)
 	if(puzzleSmall) then 
 		cellSize = 7
+		markO = smallmark
+		markX = smallXmark
 	end
 	
 	local x = puzzleX
@@ -77,7 +81,7 @@ function drawPuzzleContent(_puzzle)
 		for c=1, _puzzle.columns, 1 do
 			--TODO: Draw smaller images when puzzleSmall is true
 			if _puzzle.usergrid[r][c]=="O" then
-				love.graphics.draw(mark, x+1 + ((cellSize+1)*(c-1)), y+1 + ((cellSize+1)*(r-1)))
+				love.graphics.draw(markO, x+1 + ((cellSize+1)*(c-1)), y+1 + ((cellSize+1)*(r-1)))
 			elseif _puzzle.usergrid[r][c]=="X" then
 				love.graphics.draw(Xmark, x+1 + ((cellSize+1)*(c-1)), y+1 + ((cellSize+1)*(r-1)))
 			end

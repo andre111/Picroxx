@@ -55,8 +55,10 @@ function love.load()
 	
 	love.graphics.set3D(true) --THREE DEE
 	
-    init.fonts()
     init.menu()
+	
+	init.sound()
+	init.graphics()
 	
 	Gamestate.registerEvents()
     Gamestate.switch(mainmenu)
@@ -68,6 +70,11 @@ function love.load()
 
 end
 
+function love.quit()
+	unload.sound()
+	unload.graphics()
+end
+
 function mainmenu:init()
 
     menusubmenu = "mainmenu"
@@ -76,10 +83,7 @@ end
 
 function mainmenu:enter()
     
-    init.menugraphics()
-
-	bgmtitle = love.audio.newSource("bgm/title.wav")
-    bgmtitle:setLooping(true)
+	bgmtitle:setLooping(true)
     bgmtitle:setVolume(0.75)
     bgmtitle:play()
 
@@ -122,19 +126,14 @@ end
 
 function mainmenu:leave()
     
-    unload.menugraphics()
-
     bgmtitle:stop()
 
-	bgmtitle = nil
     collectgarbage()
 
 end
 
 function levelselect:enter(from, course)
    
-    init.levelselectgraphics()
-    
     lastCourse = course
 
     if from == mainmenu then dofile(course) end
@@ -194,12 +193,10 @@ function levelselect:mousepressed(key)
     input.checklevelgridpress()
     input.checkhalfselectorpress()
 
-
 end
 
 function levelselect:leave()
 
-    unload.levelselectgraphics()
     levelselectcleanup8x4()
     collectgarbage()
 
@@ -223,9 +220,6 @@ function puzzle:enter(from, level, gs, button)
     toptimer.clear()
 	mistake.reset()
     
-    init.puzzlegraphics() 
-    init.sfx()
-
     leveltosave = button
 
 	--TODO: ADDED
@@ -237,7 +231,6 @@ function puzzle:enter(from, level, gs, button)
 	currentNewPuzzle = convertOld()
 	resetPuzzlePosition(currentNewPuzzle)
 
-	bgmjazz = love.audio.newSource("bgm/jazz.wav")
     bgmjazz:setLooping(true)
     bgmjazz:setVolume(0.75)
     bgmjazz:play()
@@ -331,16 +324,6 @@ end
 
 function puzzle:leave()
 
-	bgmjazz = nil
-
-    sfx.mark = nil
-    sfx.Xmark = nil
-	sfx.boop = nil
-	sfx.mistake = nil
-	sfx.erase = nil
-	sfx.clearmelody = nil
-
-    unload.puzzlegraphics()
 	collectgarbage()
 
 end
