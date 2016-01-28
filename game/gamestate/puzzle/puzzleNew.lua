@@ -20,16 +20,15 @@ function checkPuzzleCompleted(_puzzle)
 	end
 	
 	if complete then
-		zoomed = false
         clear = true
         levelcleared = {280, 372, -22}
 	    bgmjazz:stop()
 	    
-        Timer.after(2, function()
+        --Timer.after(2, function()
 	        savedata.levelcleared()
 		    savedata.write()
 		    animation.levelcleared()
-		end)
+		--end)
 
 		Timer.after(10, function() Gamestate.switch(levelselect, lastCourse) end)
 	end

@@ -241,11 +241,7 @@ function puzzle:draw()
 
     love.graphics.setScreen('top')
 	
-	    if zoomed == false then
-	        drawtop.ingame()
-	    elseif zoomed == true then
-	        drawtop.ingamezoomed()
-	    end
+	    drawtop.ingame()
 	
     love.graphics.setScreen('bottom')
 		--TODO: ADDED: COMPLETE
@@ -303,7 +299,7 @@ function puzzle:keypressed(key)
   
 	    input.changemarkmode(key)
 	
-        if leveldata.gridsize == 15 then
+        if currentNewPuzzle.rows > 10 or currentNewPuzzle.columns > 10 then
             input.changezoom(key)
 	    end
 	  
@@ -342,20 +338,11 @@ function pause:draw()
 
     love.graphics.setScreen('top')
 	
-	if zoomed == false then
-	    drawtop.ingame()
+	drawtop.ingame()
 	   
-	    love.graphics.setDepth(-2)
-	    love.graphics.draw(pausetext, pauseanims[1], 110)
-	    love.graphics.setDepth(0)
-	   
-	elseif zoomed == true then
-	    drawtop.ingamezoomed()
-	   
-	    love.graphics.setDepth(-2)
-	    love.graphics.draw(pausetext, pauseanims[1], 110)
-	    love.graphics.setDepth(0)
-	end
+	love.graphics.setDepth(-2)
+	love.graphics.draw(pausetext, pauseanims[1], 110)
+	love.graphics.setDepth(0)
 	
     love.graphics.setScreen('bottom')
 

@@ -24,10 +24,7 @@ function drawtop.ingame()
 	
 	love.graphics.draw(whiteoverlay, 0, 0)
 	
-	--TODO: Reimplement
-	--[[if leveldata.gridsize == 5 then drawtop.blackgrid5() end
-	if leveldata.gridsize == 10 then drawtop.blackgrid10() end
-	if leveldata.gridsize == 15 then drawtop.blackgrid15() end]]
+	--"Pixel Preview"
 	drawPuzzleContentTop(currentNewPuzzle)
 	
 	love.graphics.setColor(255, 255, 255)
@@ -38,38 +35,6 @@ function drawtop.ingame()
 	love.graphics.setFont(squarefont)
 	love.graphics.print(leveldata.number, 89, 214)
 	love.graphics.print(leveldata.letter, 112, 214)
-	love.graphics.setColor(255, 255, 255)
-	
-end
-
-function drawtop.ingamezoomed()
-
-    love.graphics.setColor(255, 255, 255)
-	
-	--TODO: Reimplement
-	--[[if leveldata.gridsize == 15 then drawtop.smallgrid15(true) end]]
-	
-	drawtop.timer(381, 370, 354, 343, 327, 316, 3)
-	
-	if leveldata.gamemode == "easy" then
-	  love.graphics.draw(icon.normal, 5, 6)
-	  love.graphics.draw(gmlabel.easy, 24, 4)
-	end
-	
-	if leveldata.gamemode == "normal" then
-	  love.graphics.draw(icon.normal, 5, 6)
-	  love.graphics.draw(gmlabel.normal, 24, 4)
-	end
-	
-	if leveldata.gamemode == "free" then
-	  love.graphics.draw(icon.free, 5, 6)
-	  love.graphics.draw(gmlabel.free, 24, 4)
-	end
-	
-	love.graphics.setColor(148, 148, 173)
-	love.graphics.setFont(squarefont)
-	love.graphics.print(leveldata.number, 89, 2)
-	love.graphics.print(leveldata.letter, 112, 2)
 	love.graphics.setColor(255, 255, 255)
 	
 end

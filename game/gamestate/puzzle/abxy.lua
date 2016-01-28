@@ -8,10 +8,10 @@ end
 function input.changezoom(key)
 
   if key == 'a' or key == "y" then 
-    if zoomed == false then
-	  zoomed = true
-	elseif zoomed == true then
-	  zoomed = false
+    if puzzleSmall == false then
+	  puzzleSmall = true
+	elseif puzzleSmall == true then
+	  puzzleSmall = false
 	end
   end
 

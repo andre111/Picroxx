@@ -51,14 +51,17 @@ function drawPuzzleBG(_puzzle)
 	end
 	
 	--BG Number Strips
-	for r=1, _puzzle.rows, 1 do
-		if r%2==1 then
-			love.graphics.draw(numberStripLeft, x-80, y + ((r-1)*(cellSize+1)))
+	--TODO: Needs Number Strips for small zoom
+	if(not puzzleSmall) then 
+		for r=1, _puzzle.rows, 1 do
+			if r%2==1 then
+				love.graphics.draw(numberStripLeft, x-80, y + ((r-1)*(cellSize+1)))
+			end
 		end
-	end
-	for c=1, _puzzle.columns, 1 do
-		if c%2==1 then
-			love.graphics.draw(numberStripTop, x + ((c-1)*(cellSize+1)) + 1, y-80)
+		for c=1, _puzzle.columns, 1 do
+			if c%2==1 then
+				love.graphics.draw(numberStripTop, x + ((c-1)*(cellSize+1)) + 1, y-80)
+			end
 		end
 	end
 end
@@ -83,7 +86,7 @@ function drawPuzzleContent(_puzzle)
 			if _puzzle.usergrid[r][c]=="O" then
 				love.graphics.draw(markO, x+1 + ((cellSize+1)*(c-1)), y+1 + ((cellSize+1)*(r-1)))
 			elseif _puzzle.usergrid[r][c]=="X" then
-				love.graphics.draw(Xmark, x+1 + ((cellSize+1)*(c-1)), y+1 + ((cellSize+1)*(r-1)))
+				love.graphics.draw(markX, x+1 + ((cellSize+1)*(c-1)), y+1 + ((cellSize+1)*(r-1)))
 			end
 		end
 	end
@@ -92,10 +95,12 @@ end
 function drawPuzzleNumbers(_puzzle)
 	local cellSize = 13
 	local font = fontnumbers
+	local fontOffset = 2
 	--For Using Smaller Gridcells(15x15 and up?)
 	if(puzzleSmall) then 
 		cellSize = 7
 		font = fontsnumbers
+		fontOffset = 1
 	end
 	
 	local x = puzzleX
@@ -105,7 +110,7 @@ function drawPuzzleNumbers(_puzzle)
 		local currentNumber = 1
 		for i=_puzzle.columns, 1, -1 do
 			if _puzzle.numbersRows[r][i]>0 then
-				love.graphics.draw(font[_puzzle.numbersRows[r][i]], x - ((cellSize+1)*currentNumber) - 2, y + (r-1)*(cellSize+1) + 2)
+				love.graphics.draw(font[_puzzle.numbersRows[r][i]], x - ((cellSize+1)*currentNumber) - fontOffset, y + (r-1)*(cellSize+1) + fontOffset)
 				currentNumber = currentNumber + 1
 			end
 		end
