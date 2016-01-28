@@ -16,21 +16,21 @@
     button2.y = 80
     button2.x2 = 215 
     button2.y2 = 104
-    button2.effect = "none"
+    button2.effect = "levelselect"
     button2.text = "Kinoko"
     button2.exists = true
     button2.hover = false
-    button2.submenu = "none"
+    button2.submenu = "courses/mariopicross/kinoko/course.lua"
 	
     button3.x = 103
     button3.y = 116
     button3.x2 = 215 
     button3.y2 = 140
-    button3.effect = "none"
+    button3.effect = "levelselect"
     button3.text = "Star"
     button3.exists = true
     button3.hover = false
-    button3.submenu = "none"
+    button3.submenu = "courses/mariopicross/star/course.lua"
 	
     button4.x = 103
     button4.y = 152
